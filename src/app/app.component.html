@@ -1,20 +1,60 @@
-<input type="text" name="" id="" [(ngModel)]="title">
-<button (click)="guardarBD()">Guardar</button>
+<h2>Imagen recuperada de gitApi</h2>
 <img src="{{datos.avatar_url}}" width="50px">
 
-<h4 class="d-flex justify-content-between align-items-center mb-3">
-    <span class="text-muted">Paises</span>
-  </h4>
-  <div style="overflow-y: scroll; height: 200px;">
-    <ul class="list-group mb-3" *ngFor="let pais of listadoPaises">
-      <li class="list-group-item d-flex justify-content-between lh-condensed" >
-        <div style="display: flex; cursor: pointer;" >
-          <h6 class="my-0">{{pais.translations.spa.common}}</h6>
-          <img src="{{pais.flags.png}}" style="width: 35px; height: 25px; padding: 5px;">
-        </div>
-      </li>
-    </ul>
-  </div>
+<br><br>
+ 
 
+<h2>Buscar para recuperar uno solo</h2>
+<input type="text" [(ngModel)]="buscador">
+<button (click)="buscarUno()">Buscar uno</button>
+<h3>Resultados de la busqueda</h3>
+<ul>
+  <li *ngFor="let item of datosBuscados">
+    <p> {{item.titulo}} || {{item.doc_id}} </p>
+    <img src="{{item.imagen}}"  width="50px">
+    <button (click)="actualizar(item.doc_id)">Actualizar</button>
+    <button (click)="borrar(item.doc_id)">Borrar</button>
+  </li>
+</ul>
+<hr>
+<br><br>
+<h1>CRUD</h1>
+<div>
+  <ul>
+    <li *ngFor="let item of datosFirebase">
+      <p> {{item.titulo}} || {{item.doc_id}} </p>
+      <img src="{{item.imagen}}"  width="50px">
+      <button (click)="actualizar(item.doc_id)">Actualizar</button>
+      <button (click)="borrar(item.doc_id)">Borrar</button>
+    </li>
+  </ul>
+</div>
+
+<h1>Guardar con foto</h1>
+<div>
+  <input type="text" name="" id="" [(ngModel)]="title">
+  <!--------------FOTO-->
+  <label for="address2">Foto de portada </label>
+  <input type="file" accept=".png , .jpg" class="form-control" id="foto" placeholder="Seleccione una foto"
+    (change)="onUpload($event)">
+
+  <button (click)="guardarBD()">Guardar</button>
+</div>
+
+<!--
+<h4 class="d-flex justify-content-between align-items-center mb-3">
+  <span class="text-muted">Paises</span>
+</h4>
+<div style="overflow-y: scroll; height: 200px;">
+  <ul class="list-group mb-3" *ngFor="let pais of listadoPaises">
+    <li class="list-group-item d-flex justify-content-between lh-condensed">
+      <div style="display: flex; cursor: pointer;">
+        <h6 class="my-0">{{pais.translations.spa.common}}</h6>
+        <img src="{{pais.flags.png}}" style="width: 35px; height: 25px; padding: 5px;">
+      </div>
+    </li>
+  </ul>
+</div>
+-->
 
 <router-outlet></router-outlet>
